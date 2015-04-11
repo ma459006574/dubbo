@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo 
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+	<import resource="dataSource.xml" />
+	<!-- 以下为元数据相关接口 -->
+	<bean id="tMdmColinfoDao" class="com.iflytek.bus.metadata.provider.dao.TMdmColinfoDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="tMdmDatasourceDao" class="com.iflytek.bus.metadata.provider.dao.TMdmDatasourceDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="tMdmEdinfoDao" class="com.iflytek.bus.metadata.provider.dao.TMdmEdinfoDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="tMdmHistoryDao" class="com.iflytek.bus.metadata.provider.dao.TMdmHistoryDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="tMdmIndexsinfoDao" class="com.iflytek.bus.metadata.provider.dao.TMdmIndexsinfoDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="tMdmProjectDao" class="com.iflytek.bus.metadata.provider.dao.TMdmProjectDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="metadataQueryService" class="com.iflytek.bus.metadata.provider.service.MetadataQueryServiceImpl" />
+	<bean id="sqlTemplateService" class="com.iflytek.bus.metadata.provider.utils.SqlTemplateService" />
+	<bean id="metadataRegisterService" class="com.iflytek.bus.metadata.provider.service.MetadataRegisterServiceImpl" />
+	<dubbo:service interface="com.iflytek.bus.metadata.api.MetadataQueryService" ref="metadataQueryService" group="${dubbo.service.group}"/>
+	<dubbo:service interface="com.iflytek.bus.metadata.api.MetadataRegisterService" ref="metadataRegisterService" group="${dubbo.service.group}"/>
+
+	<!--=============================华丽的分隔线===================================-->
+	<!-- 以下为资源目录相关接口 -->
+	<bean id="zyglZycxlpzDao" class="com.iflytek.bus.zyml.provider.dao.TZyglZycxlpzDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="zyglZybcxpzDao" class="com.iflytek.bus.zyml.provider.dao.TZyglZybcxpzDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="zyglZylbflDao" class="com.iflytek.bus.zyml.provider.dao.TZyglZylbflDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="zyglZymlDao" class="com.iflytek.bus.zyml.provider.dao.TZyglZymlDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="zymlService" class="com.iflytek.bus.zyml.provider.service.ZymlServiceImpl" />
+	<dubbo:service interface="com.iflytek.bus.zyml.api.ZymlService" ref="zymlService" group="${dubbo.service.group}"/>
+</beans>

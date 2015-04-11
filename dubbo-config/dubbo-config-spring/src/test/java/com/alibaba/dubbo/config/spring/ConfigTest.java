@@ -916,7 +916,6 @@ public class ConfigTest {
         sc.setInterface(DemoService.class.getName());
         sc.setRef(new GenericService() {
 
-            @Override
             public Object $invoke(String method, String[] parameterTypes, Object[] args) throws GenericException {
                 return null;
             }
